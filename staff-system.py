@@ -34,9 +34,21 @@ def system():
     def home_system(username):
         print(f"Welcome back {username}.")
         time.sleep(1)
-        print(" 1 - Support tickets \n 2 - Refund Requests \n 3 - Settings")
+        options = input(" 1 - Support tickets \n 2 - Refund Requests \n 3 - Settings")
 
-    
+        if options == 1:
+
+            print("Securing connection to user support... ")
+            f = open("support.txt", "r")
+            time.sleep(2)
+            print(f.read())
+
+
+        elif options == 2:
+            print("2")
+        elif options == 3:
+            print("3")
+
 
 
 

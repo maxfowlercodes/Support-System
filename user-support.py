@@ -1,6 +1,10 @@
+import time
+
 phonesafe = False
 numlength = 0
 placenumber = 0
+name = ""
+phone = ""
 
 def usersupportstart(phonesafe, numlength):
     
@@ -19,8 +23,20 @@ def usersupportstart(phonesafe, numlength):
             else:
                 print("Please make sure your phone number is 10-11 digits EG. (07863953173)")
 
-        print("Continued work")
+        return phone
+        return name
+
+
+    
     welcome(phonesafe, numlength)
+
+    print("Connecting you to user support...")
+    f = open("support.txt", "w")
+    time.sleep(2)
+    infomation = f"{name}, {phone}"
+    f.write(infomation)
+    f.close()
+    print("Ticket Made")
 
 
 usersupportstart(phonesafe, numlength)
