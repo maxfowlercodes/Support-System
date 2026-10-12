@@ -23,8 +23,7 @@ def usersupportstart(phonesafe, numlength):
             else:
                 print("Please make sure your phone number is 10-11 digits EG. (07863953173)")
 
-        return phone
-        return name
+        return phone, name
 
 
     
