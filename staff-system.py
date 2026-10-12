@@ -1,28 +1,51 @@
+import time
 
 
 f = open("staff-login.txt", "r")
-file = open("staff-passwords", "r")
+file = open("staff-passwords.txt", "r")
 
+def system():
 
-
-
-def login_system():
-    
     username = input("Enter staff username: ")
     password = input("Enter your account password: ")
 
-    if password.isdigit() == False:
-        print("Only enter your pin number please. ")
 
-    else:
-        print("Checking detials... ")
+    def login_system(username, password):
+    
 
-    realuser = file.readline()
-    realpass = f.readline()
-    realuser = realuser.strip()
+        if password.isdigit() == False:
+            print("Only enter your pin number please. ")
+            system()
 
-    if realuser == username and realpass == password:
-        print(f"Logged in as {realuser}")
+        else:
+            print("Checking detials... ")
+            time.sleep(1)
 
-    else:
-        print("Invalid login detials.")
+        realuser = f.readline()
+        realpass = file.readline()
+        realuser = realuser.strip()
+
+        if realuser == username and realpass == password:
+            time.sleep(0.5)
+
+        else:
+            print("Invalid login detials.")
+
+    def home_system(username):
+        print(f"Welcome back {username}.")
+        time.sleep(1)
+        print(" 1 - Support tickets \n 2 - Refund Requests \n 3 - Settings")
+
+    
+
+
+
+
+
+
+
+    login_system(username, password)
+    home_system(username)
+
+
+system()
