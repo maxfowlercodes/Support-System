@@ -1,6 +1,6 @@
 phonesafe = False
 numlength = 0
-
+placenumber = 0
 
 def usersupportstart(phonesafe, numlength):
     
