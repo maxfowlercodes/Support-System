@@ -1,6 +1,7 @@
 import time
 
 
+busy = True
 f = open("staff-login.txt", "r")
 file = open("staff-passwords.txt", "r")
 
@@ -34,14 +35,31 @@ def system():
     def home_system(username):
         print(f"Welcome back {username}.")
         time.sleep(1)
-        options = input(" 1 - Support tickets \n 2 - Refund Requests \n 3 - Settings")
+        options = int(input(" 1 - Support tickets \n 2 - Refund Requests \n 3 - Settings "))
 
         if options == 1:
 
             print("Securing connection to user support... ")
             f = open("support.txt", "r")
             time.sleep(2)
-            print(f.read())
+            print(f.readline())
+            f.close()
+            ans = input("Your message: ")
+            f = open("support.txt", "a")
+            f.write(ans)
+            f.close()
+            busy = False
+            while busy == False:
+                f = open("support.txt", "a")
+                if f.read() == ans:
+                   print("No response") 
+
+                else:
+                    print(f.readline())
+                    ans = input("Your message: ")
+                    f.write(ans)
+                    f.close()
+                
 
 
         elif options == 2:
