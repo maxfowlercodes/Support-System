@@ -2,10 +2,12 @@ import time
 
 
 busy = True
+response = ""
+ans = ""
 f = open("staff-login.txt", "r")
 file = open("staff-passwords.txt", "r")
 
-def system():
+def system(response, ans):
 
     username = input("Enter staff username: ")
     password = input("Enter your account password: ")
@@ -30,9 +32,9 @@ def system():
             time.sleep(0.5)
 
         else:
-            print("Invalid login detials.")
+            print("Invalid login details...")
 
-    def home_system(username):
+    def home_system(username, response, ans):
         print(f"Welcome back {username}.")
         time.sleep(1)
         options = int(input(" 1 - Support tickets \n 2 - Refund Requests \n 3 - Settings "))
@@ -44,18 +46,26 @@ def system():
             time.sleep(2)
             print(f.readline())
             f.close()
+
+
             ans = input("Your message: ")
-            f = open("support.txt", "a")
+            f = open("support.txt", "w")
             f.write(ans)
             f.close()
             busy = False
+
+
+
             while busy == False:
-                f = open("support.txt", "a")
-                if f.read() == ans:
-                   print("No response") 
+                f = open("support.txt", "r")
+                response = f.readline()
+                if response == ans: 
+                   f.close()
 
                 else:
-                    print(f.readline())
+                    print(f"User says: {response}")
+                    f.close()
+                    f = open("support.txt", "w")
                     ans = input("Your message: ")
                     f.write(ans)
                     f.close()
@@ -75,7 +85,7 @@ def system():
 
 
     login_system(username, password)
-    home_system(username)
+    home_system(username, response, ans)
 
 
-system()
+system(response, ans)

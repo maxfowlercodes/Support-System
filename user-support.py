@@ -6,9 +6,11 @@ numlength = 0
 placenumber = 0
 name = ""
 phone = ""
+busy = True
+answered = False
+ans = ""
 
-
-def usersupportstart(phonesafe, numlength, name, phone):
+def usersupportstart(phonesafe, numlength, name, phone, busy, answered, ans):
     
     def welcome(phonesafe, numlength):
 
@@ -26,26 +28,55 @@ def usersupportstart(phonesafe, numlength, name, phone):
             else:
                 print("Please make sure your phone number is 10-11 digits EG. (07863953173)")
 
-        print("Trying to return")
-        if phone and name != "":
-            print("Both variables have values")
         
         return phone, name
   
 
 
-    def supportconnection(name, phone):
+    def supportconnection(name, phone, ans):
         print("Connecting you to user support...")
         f = open("support.txt", "w")
         time.sleep(2)
-        infomation = f"{name}, {phone}"
-        f.write(infomation)
+        ans = f"{name}, {phone}"
+        f.write(ans)
         f.close()
         print("Ticket Made")
+        busy = False
+
+        return busy,ans
+
+
+
+    def conversation_start(busy, answered, ans):
+        while answered == False:
+            f = open("support.txt", "r")
+            if ans == f.readline().strip():
+                busy = True
+            else:
+                busy = False
+                answered = True
+
+
+        while busy == False and answered == True:
+            f = open("support.txt", "r")
+            response = f.readline()
+            if response == ans: 
+                f.close()
+
+            else:
+                print(f"Staff says: {response}")
+                f.close()
+                f = open("support.txt", "w")
+                ans = input("Your message: ")
+                f.write(ans)
+                f.close()
+
+            
 
     phone, name = welcome(phonesafe, numlength)
-    supportconnection(name, phone)
+    busy, ans = supportconnection(name, phone, ans)
+    conversation_start(busy, answered, ans)
     sys.exit
 
 
-usersupportstart(phonesafe, numlength, name, phone)
+usersupportstart(phonesafe, numlength, name, phone, busy, answered, ans)
